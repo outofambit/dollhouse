@@ -8,7 +8,7 @@ module.exports = (grunt) ->
           bare: true,
           sourceMap: true,
         },
-        files: {'compiled.js': '*.coffee'}
+        files: {'compiled.js': 'coffee/*.coffee'}
       }
     },
 
@@ -24,7 +24,7 @@ module.exports = (grunt) ->
 
     watch: {
       scripts: {
-        files: ['*.js', '*.html'],
+        files: ['coffee/*.coffee', '*.html'],
         tasks: ['default'],
         options: {
           spawn: false,
