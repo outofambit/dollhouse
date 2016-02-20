@@ -16,7 +16,13 @@ module.exports = (grunt) ->
       server: {
         options: {
           port: 9001,
-          # open: true,
+          keepalive: true
+        }
+      },
+      keepalive: {
+        options: {
+          port: 9001,
+          open: true,
           keepalive: true
         }
       }
@@ -25,9 +31,9 @@ module.exports = (grunt) ->
     watch: {
       scripts: {
         files: ['coffee/*.coffee', '*.html'],
-        tasks: ['default'],
+        tasks: ['coffee', 'connect:server'],
         options: {
-          spawn: false,
+          spawn: true,
           interrupt: true,
           debounceDelay: 200,
           atBegin: true
@@ -40,4 +46,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-coffee')
   grunt.loadNpmTasks('grunt-contrib-watch')
 
-  grunt.registerTask('default', ['coffee', 'connect'])
+  grunt.registerTask('default', ['coffee', 'connect:keepalive'])
