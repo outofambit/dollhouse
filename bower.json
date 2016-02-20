@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "three.js": "threejs#*"
+    "three.js": "threejs#*",
+    "THREEOrbitControls": "^71.1.0"
   }
 }
