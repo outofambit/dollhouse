@@ -31,23 +31,23 @@ module.exports = (grunt) ->
     watch: {
       scripts: {
         files: ['coffee/*.coffee', '*.html'],
-        tasks: ['coffee', 'connect:server'],
+        tasks: ['coffee'],
         options: {
           spawn: true,
           interrupt: true,
-          debounceDelay: 200,
           atBegin: true
         },
       },
     },
 
     coffee_jshint: {
-      options: {
-        
-      },
       check: {
         src: ['coffee/*.coffee']
       }
+    },
+
+    concurrent: {
+      dev: ['watch', 'connect:server']
     }
 
   })
@@ -55,6 +55,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-connect')
   grunt.loadNpmTasks('grunt-contrib-coffee')
   grunt.loadNpmTasks('grunt-contrib-watch')
-  grunt.loadNpmTasks('grunt-coffee-jshint');
+  grunt.loadNpmTasks('grunt-coffee-jshint')
+  grunt.loadNpmTasks('grunt-concurrent')
 
   grunt.registerTask('default', ['coffee', 'connect:keepalive'])
+  grunt.registerTask('dev', ['concurrent:dev'])
