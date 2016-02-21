@@ -7,9 +7,30 @@ renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
+# lighting
+ambientLight = new THREE.AmbientLight( 0x000000 )
+scene.add(ambientLight)
+lights = []
+lights[0] = new THREE.PointLight( 0xffffff, 1, 0 )
+lights[1] = new THREE.PointLight( 0xffffff, 1, 0 )
+lights[2] = new THREE.PointLight( 0xffffff, 1, 0 )
+
+lights[0].position.set( 0, 200, 0 )
+lights[1].position.set( 100, 200, 100 )
+lights[2].position.set( -100, -200, -100 )
+
+scene.add( lights[0] )
+scene.add( lights[1] )
+scene.add( lights[2] )
+
 # make the displays (boxes)
 geometry = new THREE.BoxGeometry(4, 3, 0.2)
-material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+material = new THREE.MeshPhongMaterial({
+            color: 0x156289,
+            emissive: 0x072534,
+            side: THREE.DoubleSide,
+            shading: THREE.FlatShading
+          })
 
 up = new THREE.Vector3( 0, 1, 0 )
 ring_vertices_num = 15
