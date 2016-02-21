@@ -7,28 +7,24 @@ renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
+
+zee = new THREE.Vector3( 0, 0, 1 )
+up = new THREE.Vector3( 0, 1, 0 )
 geometry = new THREE.BoxGeometry(1, 1, 1)
 material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-cube = new THREE.Mesh(geometry, material)
-scene.add(cube)
 
-geometry2 = new THREE.BoxGeometry(1, 1, 1)
-material2 = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-cube2 = new THREE.Mesh(geometry2, material2)
-scene.add(cube2)
+ring_vertices_num = 15
 
-zee = new THREE.Vector3( 0, 0, 1 );
-up = new THREE.Vector3( 0, 1, 0 );
-zee.applyAxisAngle(up, Math.PI/2)
-cube2.translateOnAxis(zee, 10)
+for step in [0..ring_vertices_num]
+  cube = new THREE.Mesh(geometry, material)
+  scene.add(cube)
+  zee.applyAxisAngle(up, Math.PI*2/ring_vertices_num)  
+  cube.translateOnAxis(zee, 10)
 
 camera.position.z = 5;
 
 render = () ->
   requestAnimationFrame(render)
-
-  cube.rotation.x += 0.1
-  cube.rotation.y += 0.1
 
   renderer.render(scene, camera)
 
