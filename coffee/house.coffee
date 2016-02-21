@@ -13,7 +13,7 @@ material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
 
 up = new THREE.Vector3( 0, 1, 0 )
 ring_vertices_num = 15
-ring_center = new THREE.Vector3( 0, 0, 0 )
+ring_center = new THREE.Vector3( 0, 2, 0 )
 ray = new THREE.Vector3( 0, 0, 1 )
 ring_radius = 10
 
@@ -23,7 +23,10 @@ for step in [0..ring_vertices_num]
 
   step_ray = new THREE.Vector3()
   step_ray.copy ray
-  step_ray.applyAxisAngle(up, Math.PI*2/ring_vertices_num*step)  
+  step_ray.applyAxisAngle(up, Math.PI*2/ring_vertices_num*step)
+  cube.translateX ring_center.x
+  cube.translateY ring_center.y
+  cube.translateZ ring_center.z
   cube.translateOnAxis(step_ray, ring_radius)
   cube.lookAt(ring_center)
 
