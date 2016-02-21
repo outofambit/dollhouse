@@ -31,7 +31,7 @@ module.exports = (grunt) ->
     watch: {
       scripts: {
         files: ['coffee/*.coffee', '*.html'],
-        tasks: ['coffee_jshint:check', 'coffee', 'connect:server'],
+        tasks: ['coffee', 'connect:server'],
         options: {
           spawn: true,
           interrupt: true,
