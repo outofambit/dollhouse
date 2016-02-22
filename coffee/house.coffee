@@ -63,11 +63,12 @@ ring_focus = new THREE.Vector3(0, 0, 0)
 ring_focus.copy(ring_center)
 # ring_focus.sub()
 ray = new THREE.Vector3( 0, 0, 1 )
-ring_radius = 586/2
+# default edge to edge
+ring_radius = 320
 
 displays = []
 
-for step in [0..ring_vertices_num]
+for step in [0..ring_vertices_num-1]
   cube = new THREE.Mesh(geometry, material)
   scene.add cube
 
@@ -86,20 +87,19 @@ for step in [0..ring_vertices_num]
   cube.translateOnAxis(step_ray, ring_radius)
   cube.lookAt ring_focus
 
-# kick off an animation
-tween_load = {y: 0}
-tween = new TWEEN.Tween(tween_load)
-  .to({y: 200 }, 4000)
-  .onUpdate(() ->
-    ring_focus.y = this.y
-    for d in displays
-      d.lookAt ring_focus
-    )
-  .repeat(Infinity)
-  .yoyo(true)
-  .start()
-
-camera.position.z = 5;
+  # kick off an animation
+  tween_load = {y: 0, step: step, focus: ring_focus}
+  tween = new TWEEN.Tween(tween_load)
+    .to({y: 200 }, 2000)
+    .onUpdate(() ->
+      this.focus.y = this.y
+      displays[this.step].lookAt this.focus
+      )
+    .easing(TWEEN.Easing.Cubic.InOut)
+    .repeat(Infinity)
+    .yoyo(true)
+    .delay(step*200)
+    .start()
 
 render = () ->
   requestAnimationFrame(render)
