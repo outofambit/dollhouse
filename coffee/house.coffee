@@ -40,13 +40,22 @@ scene.add floor_mesh
 
 # make the displays (boxes)
 geometry = new THREE.BoxGeometry(122.7, 71.9, 5.1)
-material = new THREE.MeshPhongMaterial({
+material = new THREE.MeshLambertMaterial({
             color: 0x101010,
             specular: 0x414141,
-            shininess: 90,
-            side: THREE.DoubleSide,
+            shininess: 10,
+            side: THREE.FrontSide,
             shading: THREE.FlatShading
           })
+
+# for the actual screen part of the display
+screen_geom = new THREE.PlaneGeometry(121.6, 68.6)
+screen_mat = new THREE.MeshPhongMaterial({
+              color: 0x101010,
+              shininess: 90,
+              side: THREE.FrontSide,
+              shading: THREE.FlatShading
+            })
 
 ring_vertices_num = 15
 ring_center = new THREE.Vector3( 0, 163.8, 0 )
@@ -58,6 +67,10 @@ ring_radius = 586/2
 for step in [0..ring_vertices_num]
   cube = new THREE.Mesh(geometry, material)
   scene.add(cube)
+
+  flat = new THREE.Mesh(screen_geom, screen_mat)
+  flat.translateZ(3)
+  cube.add flat
 
   step_ray = new THREE.Vector3()
   step_ray.copy ray
