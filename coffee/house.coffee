@@ -23,16 +23,29 @@ scene.add( lights[0] )
 scene.add( lights[1] )
 scene.add( lights[2] )
 
+up = new THREE.Vector3( 0, 1, 0 )
+
+# floor of the room
+floor_geom = new THREE.PlaneGeometry(50, 50)
+floor_mat = new THREE.MeshLambertMaterial({
+                  color: 0x202020,
+                  side: THREE.DoubleSide,
+                  shading: THREE.FlatShading,
+                })
+floor_mesh = new THREE.Mesh( floor_geom, floor_mat );
+floor_mesh.lookAt up
+scene.add floor_mesh
+
 # make the displays (boxes)
 geometry = new THREE.BoxGeometry(4, 3, 0.2)
 material = new THREE.MeshPhongMaterial({
-            color: 0x156289,
-            emissive: 0x072534,
+            color: 0x101010,
+            specular: 0x414141,
+            shininess: 90,
             side: THREE.DoubleSide,
             shading: THREE.FlatShading
           })
 
-up = new THREE.Vector3( 0, 1, 0 )
 ring_vertices_num = 15
 ring_center = new THREE.Vector3( 0, 2, 0 )
 ring_focus = new THREE.Vector3().copy(ring_center)
