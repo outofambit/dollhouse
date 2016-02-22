@@ -98,8 +98,7 @@ for step in [0..ring_vertices_num-1]
     .easing(TWEEN.Easing.Cubic.InOut)
     .repeat(Infinity)
     .yoyo(true)
-    .delay(step*200)
-    .start()
+    .start(1000 + step*200)
 
 camera.position.z = 5
 
