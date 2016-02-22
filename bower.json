@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "three.js": "threejs#*"
+    "three.js": "threejs#*",
+    "tween.js": "tweenjs#^16.3.4"
   }
 }
