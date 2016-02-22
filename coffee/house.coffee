@@ -1,5 +1,5 @@
 scene = new THREE.Scene()
-camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000)
 
 controls = new THREE.OrbitControls(camera)
 
@@ -15,9 +15,9 @@ lights[0] = new THREE.PointLight( 0xffffff, 1, 0 )
 lights[1] = new THREE.PointLight( 0xffffff, 1, 0 )
 lights[2] = new THREE.PointLight( 0xffffff, 1, 0 )
 
-lights[0].position.set( 0, 200, 0 )
-lights[1].position.set( 100, 200, 100 )
-lights[2].position.set( -100, -200, -100 )
+lights[0].position.set( 0, 500, 0 )
+lights[1].position.set( 1000, 2000, 100 )
+lights[2].position.set( -1000, -2000, -1000 )
 
 scene.add( lights[0] )
 scene.add( lights[1] )
@@ -25,8 +25,10 @@ scene.add( lights[2] )
 
 up = new THREE.Vector3( 0, 1, 0 )
 
+# ALL MEASUREMENTS IN CM
+
 # floor of the room
-floor_geom = new THREE.PlaneGeometry(50, 50)
+floor_geom = new THREE.PlaneGeometry(1000, 1000)
 floor_mat = new THREE.MeshLambertMaterial({
                   color: 0x202020,
                   side: THREE.DoubleSide,
@@ -37,7 +39,7 @@ floor_mesh.lookAt up
 scene.add floor_mesh
 
 # make the displays (boxes)
-geometry = new THREE.BoxGeometry(4, 3, 0.2)
+geometry = new THREE.BoxGeometry(122.7, 71.9, 5.1)
 material = new THREE.MeshPhongMaterial({
             color: 0x101010,
             specular: 0x414141,
@@ -47,11 +49,11 @@ material = new THREE.MeshPhongMaterial({
           })
 
 ring_vertices_num = 15
-ring_center = new THREE.Vector3( 0, 2, 0 )
+ring_center = new THREE.Vector3( 0, 163.8, 0 )
 ring_focus = new THREE.Vector3().copy(ring_center)
-ring_focus.sub(ring_focus)
+# ring_focus.sub(ring_focus)
 ray = new THREE.Vector3( 0, 0, 1 )
-ring_radius = 10
+ring_radius = 586/2
 
 for step in [0..ring_vertices_num]
   cube = new THREE.Mesh(geometry, material)
