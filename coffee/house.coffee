@@ -11,7 +11,7 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
 # lighting
-ambientLight = new THREE.AmbientLight( 0x000000 )
+ambientLight = new THREE.AmbientLight( 0xffffff )
 scene.add(ambientLight)
 lights = []
 lights[0] = new THREE.PointLight( 0xffffff, 1, 0 )
@@ -100,6 +100,8 @@ for step in [0..ring_vertices_num-1]
     .yoyo(true)
     .delay(step*200)
     .start()
+
+camera.position.z = 5
 
 render = () ->
   requestAnimationFrame(render)
