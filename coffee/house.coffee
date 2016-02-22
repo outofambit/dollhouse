@@ -1,3 +1,6 @@
+
+# assumes threejs and tween js have been included prior
+
 scene = new THREE.Scene()
 camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000)
 
@@ -32,20 +35,17 @@ floor_geom = new THREE.PlaneGeometry(1000, 1000)
 floor_mat = new THREE.MeshLambertMaterial({
                   color: 0x202020,
                   side: THREE.DoubleSide,
-                  shading: THREE.FlatShading,
                 })
 floor_mesh = new THREE.Mesh( floor_geom, floor_mat );
 floor_mesh.lookAt up
+floor_mesh.receiveShadow = true
 scene.add floor_mesh
 
 # make the displays (boxes)
 geometry = new THREE.BoxGeometry(122.7, 71.9, 5.1)
 material = new THREE.MeshLambertMaterial({
             color: 0x101010,
-            specular: 0x414141,
-            shininess: 10,
             side: THREE.FrontSide,
-            shading: THREE.FlatShading
           })
 
 # for the actual screen part of the display
@@ -59,14 +59,19 @@ screen_mat = new THREE.MeshPhongMaterial({
 
 ring_vertices_num = 15
 ring_center = new THREE.Vector3( 0, 163.8, 0 )
-ring_focus = new THREE.Vector3().copy(ring_center)
-# ring_focus.sub(ring_focus)
+ring_focus = new THREE.Vector3(0, 0, 0)
+ring_focus.copy(ring_center)
+# ring_focus.sub()
 ray = new THREE.Vector3( 0, 0, 1 )
 ring_radius = 586/2
 
+displays = []
+
 for step in [0..ring_vertices_num]
   cube = new THREE.Mesh(geometry, material)
-  scene.add(cube)
+  scene.add cube
+
+  displays.push cube
 
   flat = new THREE.Mesh(screen_geom, screen_mat)
   flat.translateZ(3)
@@ -81,11 +86,28 @@ for step in [0..ring_vertices_num]
   cube.translateOnAxis(step_ray, ring_radius)
   cube.lookAt ring_focus
 
+# kick off an animation
+tween_load = {y: 0}
+tween = new TWEEN.Tween(tween_load)
+  .to({y: 200 }, 4000)
+  .onUpdate(() ->
+    ring_focus.y = this.y
+    for d in displays
+      d.lookAt ring_focus
+    )
+  .repeat(Infinity)
+  .yoyo(true)
+  .start()
+
 camera.position.z = 5;
 
 render = () ->
   requestAnimationFrame(render)
-
   renderer.render(scene, camera)
 
+animate = (time) ->
+  requestAnimationFrame(animate);
+  TWEEN.update(time);
+
+animate()
 render()
