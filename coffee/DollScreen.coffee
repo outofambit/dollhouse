@@ -1,6 +1,6 @@
 class DollScreen
 
-  _mesh = null
+  mesh = null
   screen = null
   _group_center = new THREE.Vector3(0, 0, 0)
   _focal_point = new THREE.Vector3(0, 0, 0)
@@ -14,7 +14,7 @@ class DollScreen
                 side: THREE.FrontSide,
               })
 
-    @_mesh = new THREE.Mesh(geometry, material)
+    @mesh = new THREE.Mesh(geometry, material)
 
     # for the actual screen part of the screen
     screen_geom = new THREE.PlaneGeometry(121.6, 68.6)
@@ -27,20 +27,20 @@ class DollScreen
 
     @screen = new THREE.Mesh(screen_geom, screen_mat)
     @screen.translateZ(3)
-    @_mesh.add @screen
+    @mesh.add @screen
 
   setupPosition: (@_group_center, radius, rotation) ->
-    @_mesh.translateX @_group_center.x
-    @_mesh.translateY @_group_center.y
-    @_mesh.translateZ @_group_center.z
+    @mesh.translateX @_group_center.x
+    @mesh.translateY @_group_center.y
+    @mesh.translateZ @_group_center.z
     @_group_center_ray = new THREE.Vector3(0, 0, 1)
     @_group_center_ray.applyAxisAngle(new THREE.Vector3(0, 1, 0), rotation)
-    @_mesh.translateOnAxis(@_group_center_ray, ring_radius)
-    @_mesh.lookAt @_group_center
+    @mesh.translateOnAxis(@_group_center_ray, ring_radius)
+    @mesh.lookAt @_group_center
 
   setupTexture: (path) ->
     loader = new THREE.TextureLoader()
     @screen.material.map = loader.load(path)
     @screen.material.color = 0xffffff
 
-  translateAlongCenterRay: (amount) -> @_mesh.translateOnAxis @_group_center_ray amount
+  translateAlongCenterRay: (amount) -> @mesh.translateOnAxis @_group_center_ray amount

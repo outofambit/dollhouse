@@ -52,7 +52,7 @@ ring_radius = 320
 for step in [0..ring_vertices_num-1]
 
   ds = new DollScreen()
-  scene.add ds._mesh
+  scene.add ds.mesh
   displays.push ds
   ds.setupPosition(ring_center, ring_radius, Math.PI*2/ring_vertices_num*step)
   ds.setupTexture('media/neko.png')
@@ -63,7 +63,7 @@ for step in [0..ring_vertices_num-1]
     .to({y: 200 }, 2000)
     .onUpdate(() ->
       this.focus.y = this.y
-      displays[this.step]._mesh.lookAt this.focus
+      displays[this.step].mesh.lookAt this.focus
       )
     .easing(TWEEN.Easing.Cubic.InOut)
     .repeat(Infinity)
