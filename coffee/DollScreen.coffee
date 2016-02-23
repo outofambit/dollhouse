@@ -1,6 +1,6 @@
 class DollScreen
 
-  @_mesh = null
+  _mesh = null
   _group_center = new THREE.Vector3(0, 0, 0)
   _focal_point = new THREE.Vector3(0, 0, 0)
   _group_center_ray = new THREE.Vector3(0, 0, 0)
@@ -26,7 +26,6 @@ class DollScreen
 
     flat = new THREE.Mesh(screen_geom, screen_mat)
     flat.translateZ(3)
-    console.log(flat)
     @_mesh.add flat
 
   setupPosition: (@_group_center, radius, rotation) ->
