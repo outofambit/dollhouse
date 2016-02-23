@@ -19,8 +19,7 @@ class DollScreen
     # for the actual screen part of the screen
     screen_geom = new THREE.PlaneGeometry(121.6, 68.6)
     screen_mat = new THREE.MeshPhongMaterial({
-                  color: 0x101010,
-                  shininess: 90,
+                  color: 0xffffff,
                   side: THREE.FrontSide,
                   shading: THREE.FlatShading
                 })
@@ -41,6 +40,5 @@ class DollScreen
   setupTexture: (path) ->
     loader = new THREE.TextureLoader()
     @screen.material.map = loader.load(path)
-    @screen.material.color = 0xffffff
 
   translateAlongCenterRay: (amount) -> @mesh.translateOnAxis @_group_center_ray amount
