@@ -52,18 +52,18 @@ ring_radius = 320
 for step in [0..ring_vertices_num-1]
 
   ds = new DollScreen()
-  scene.add ds.mesh
+  scene.add ds.mount
   displays.push ds
   ds.setupPosition(ring_center, ring_radius, Math.PI*2/ring_vertices_num*step)
   ds.setupTexture('media/neko.png')
 
   # kick off an animation
-  tween_load = {y: 0, step: step, focus: ring_focus}
+  tween_load = {yaw: Math.PI/8, h: 0, step: step}
   tween = new TWEEN.Tween(tween_load)
-    .to({y: 200 }, 2000)
+    .to({yaw: -Math.PI/8, h: -20 }, 2000)
     .onUpdate(() ->
-      this.focus.y = this.y
-      displays[this.step].mesh.lookAt this.focus
+      displays[this.step].setScreenYaw @yaw
+      displays[this.step].setScreenHeight @h
       )
     .easing(TWEEN.Easing.Cubic.InOut)
     .repeat(Infinity)
