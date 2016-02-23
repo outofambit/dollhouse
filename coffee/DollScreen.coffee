@@ -1,6 +1,7 @@
 class DollScreen
 
   _mesh = null
+  screen = null
   _group_center = new THREE.Vector3(0, 0, 0)
   _focal_point = new THREE.Vector3(0, 0, 0)
   _group_center_ray = new THREE.Vector3(0, 0, 0)
@@ -24,9 +25,9 @@ class DollScreen
                   shading: THREE.FlatShading
                 })
 
-    flat = new THREE.Mesh(screen_geom, screen_mat)
-    flat.translateZ(3)
-    @_mesh.add flat
+    @screen = new THREE.Mesh(screen_geom, screen_mat)
+    @screen.translateZ(3)
+    @_mesh.add @screen
 
   setupPosition: (@_group_center, radius, rotation) ->
     @_mesh.translateX @_group_center.x
@@ -36,5 +37,10 @@ class DollScreen
     @_group_center_ray.applyAxisAngle(new THREE.Vector3(0, 1, 0), rotation)
     @_mesh.translateOnAxis(@_group_center_ray, ring_radius)
     @_mesh.lookAt @_group_center
+
+  setupTexture: (path) ->
+    loader = new THREE.TextureLoader()
+    @screen.material.map = loader.load(path)
+    @screen.material.color = 0xffffff
 
   translateAlongCenterRay: (amount) -> @_mesh.translateOnAxis @_group_center_ray amount

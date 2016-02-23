@@ -55,6 +55,7 @@ for step in [0..ring_vertices_num-1]
   scene.add ds._mesh
   displays.push ds
   ds.setupPosition(ring_center, ring_radius, Math.PI*2/ring_vertices_num*step)
+  ds.setupTexture('media/neko.png')
 
   # kick off an animation
   tween_load = {y: 0, step: step, focus: ring_focus}
