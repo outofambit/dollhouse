@@ -49,6 +49,6 @@ class DollScreen
 
   setScreenHeight: (amount) -> @mesh.position.y =  amount
 
-  setScreenYaw: (amount) -> @mesh.rotation.x = amount
+  setScreenYaw: (amount) -> @mesh.rotation.y = amount
 
-  setScreenPitch: (amount) -> @mesh.rotation.y = amount
+  setScreenPitch: (amount) -> @mesh.rotation.x = amount

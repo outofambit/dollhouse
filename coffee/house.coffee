@@ -58,11 +58,11 @@ for step in [0..ring_vertices_num-1]
   ds.setupTexture('media/neko.png')
 
   # kick off an animation
-  tween_load = {yaw: Math.PI/8, h: 0, step: step}
+  tween_load = {p: Math.PI/8, h: 0, step: step}
   tween = new TWEEN.Tween(tween_load)
-    .to({yaw: -Math.PI/8, h: -20 }, 2000)
+    .to({p: -Math.PI/8, h: -20 }, 2000)
     .onUpdate(() ->
-      displays[this.step].setScreenYaw @yaw
+      displays[this.step].setScreenPitch @p
       displays[this.step].setScreenHeight @h
       )
     .easing(TWEEN.Easing.Cubic.InOut)
