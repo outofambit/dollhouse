@@ -12,9 +12,12 @@ class DollScreen
 
     # for the main chunk of the screen
     geometry = new THREE.BoxGeometry(123, 70, 2)
-    material = new THREE.MeshLambertMaterial({
-                color: 0x101010,
+    material = new THREE.MeshPhongMaterial({
+                color: 0x000000,
+                specular: 0x434343,
+                shininess: 40,
                 side: THREE.FrontSide,
+                shading: THREE.SmoothShading,
               })
 
     @mesh = new THREE.Mesh(geometry, material)
@@ -24,6 +27,8 @@ class DollScreen
     screen_geom = new THREE.PlaneGeometry(121, 68)
     screen_mat = new THREE.MeshPhongMaterial({
                   color: 0xffffff,
+                  specular: 0x1e1e1e,
+                  shininess: 10,
                   side: THREE.FrontSide,
                   shading: THREE.FlatShading
                 })
