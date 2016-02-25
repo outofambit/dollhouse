@@ -6,7 +6,7 @@ camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight,
 
 controls = new THREE.OrbitControls(camera)
 
-renderer = new THREE.WebGLRenderer()
+renderer = new THREE.WebGLRenderer({antialias: true})
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
