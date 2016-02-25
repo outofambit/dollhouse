@@ -18,13 +18,13 @@ document.body.appendChild(renderer.domElement)
 ambientLight = new THREE.AmbientLight( 0xffffff )
 scene.add(ambientLight)
 lights = []
-lights[0] = new THREE.PointLight( 0xffffff, 1, 0 )
-lights[1] = new THREE.PointLight( 0xffffff, 1, 0 )
-lights[2] = new THREE.PointLight( 0xffffff, 1, 0 )
+lights[0] = new THREE.PointLight( 0xffffff, 0.25, 0 )
+lights[1] = new THREE.PointLight( 0xffffff, 0.25, 0 )
+lights[2] = new THREE.PointLight( 0xffffff, 0.25, 0 )
 
-lights[0].position.set( 0, 500, 0 )
-lights[1].position.set( 1000, 2000, 100 )
-lights[2].position.set( -1000, -2000, -1000 )
+lights[0].position.set( 0, 340, 0 )
+lights[1].position.set( 100, 340, 100 )
+lights[2].position.set( -100, 340, -100 )
 
 scene.add( lights[0] )
 scene.add( lights[1] )
@@ -40,18 +40,26 @@ floor_mat = new THREE.MeshLambertMaterial({
                   color: 0x202020,
                   side: THREE.DoubleSide,
                 })
-floor_mesh = new THREE.Mesh( floor_geom, floor_mat );
+floor_mesh = new THREE.Mesh( floor_geom, floor_mat )
 floor_mesh.lookAt up
 floor_mesh.receiveShadow = true
 scene.add floor_mesh
 
+ceil_mesh = new THREE.Mesh( floor_geom, floor_mat )
+ceil_mesh.position.y = 350
+floor_mesh.receiveShadow = true
+ceil_mesh.lookAt up
+scene.add ceil_mesh
+
 # make the displays (boxes)
 displays = []
 ring_vertices_num = 15
-ring_center = new THREE.Vector3( 0, 163.8, 0 )
+# default height
+# ring_center = new THREE.Vector3( 0, 163.8, 0 )
+ring_center = new THREE.Vector3( 0, 200, 0 )
 ring_focus = new THREE.Vector3(0, 0, 0)
 ring_focus.copy(ring_center)
-ring_radius = 320
+ring_radius = 360
 
 for step in [0..ring_vertices_num-1]
 
