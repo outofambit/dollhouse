@@ -11,7 +11,7 @@ class DollScreen
     @mount = new THREE.Object3D()
 
     # for the main chunk of the screen
-    geometry = new THREE.BoxGeometry(122.7, 71.9, 5.1)
+    geometry = new THREE.BoxGeometry(123, 70, 2)
     material = new THREE.MeshLambertMaterial({
                 color: 0x101010,
                 side: THREE.FrontSide,
@@ -21,7 +21,7 @@ class DollScreen
     @mount.add @mesh
 
     # for the actual screen part of the screen
-    screen_geom = new THREE.PlaneGeometry(121.6, 68.6)
+    screen_geom = new THREE.PlaneGeometry(121, 68)
     screen_mat = new THREE.MeshPhongMaterial({
                   color: 0xffffff,
                   side: THREE.FrontSide,
@@ -29,7 +29,7 @@ class DollScreen
                 })
 
     @screen = new THREE.Mesh(screen_geom, screen_mat)
-    @screen.translateZ(3)
+    @screen.translateZ(1.5)
     @mesh.add @screen
 
   setupPosition: (@_group_center, radius, rotation) ->
