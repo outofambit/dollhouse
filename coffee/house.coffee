@@ -1,10 +1,14 @@
 
 # assumes threejs and tween js have been included prior
 
+clock = new THREE.Clock()
 scene = new THREE.Scene()
 camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000)
 
-controls = new THREE.OrbitControls(camera)
+controls = new THREE.FlyControls(camera)
+controls.movementSpeed = 500
+controls.rollSpeed = Math.PI / 12
+controls.dragToLook = true
 
 renderer = new THREE.WebGLRenderer({antialias: true})
 renderer.setSize(window.innerWidth, window.innerHeight)
@@ -70,15 +74,18 @@ for step in [0..ring_vertices_num-1]
     .yoyo(true)
     .start(1000 + step*500)
 
-camera.position.z = 5
+camera.position.y = 100
 
 render = () ->
   requestAnimationFrame(render)
   renderer.render(scene, camera)
 
 animate = (time) ->
-  requestAnimationFrame(animate);
-  TWEEN.update(time);
+  requestAnimationFrame(animate)
+  TWEEN.update(time)
+
+  delta = clock.getDelta()
+  controls.update(delta)
 
 animate()
 render()
