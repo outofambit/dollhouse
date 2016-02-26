@@ -27,7 +27,7 @@ up = new THREE.Vector3( 0, 1, 0 )
 # ALL MEASUREMENTS IN CM
 
 # floor of the room
-floor_geom = new THREE.PlaneGeometry(1000, 1000)
+floor_geom = new THREE.PlaneGeometry(100000, 100000)
 floor_mat = new THREE.MeshLambertMaterial({
                   color: 0x202020,
                   side: THREE.DoubleSide,
