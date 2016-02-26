@@ -51,7 +51,7 @@ ring_vertices_num = 15
 ring_center = new THREE.Vector3( 0, 200, 0 )
 ring_focus = new THREE.Vector3(0, 0, 0)
 ring_focus.copy(ring_center)
-ring_radius = 360
+ring_radius = 310
 
 for step in [0..ring_vertices_num-1]
 
@@ -59,21 +59,11 @@ for step in [0..ring_vertices_num-1]
   scene.add ds.mount
   displays.push ds
   ds.setupPosition(ring_center, ring_radius, Math.PI*2/ring_vertices_num*step)
-  ds.setupTexture('media/neko.png')
-  # ds.setupTexture('media/slice' + (step+1) + '.png')
+  # ds.setupTexture('media/neko.png')
+  ds.setupTexture('media/slice' + (step+1) + '.png')
 
-  # kick off an animation
-  tween_load = {p: Math.PI/8, h: 0, step: step}
-  tween = new TWEEN.Tween(tween_load)
-    .to({p: -Math.PI/8, h: -20 }, 2000)
-    .onUpdate(() ->
-      displays[this.step].setScreenPitch @p
-      displays[this.step].setScreenHeight @h
-      )
-    .easing(TWEEN.Easing.Cubic.InOut)
-    .repeat(Infinity)
-    .yoyo(true)
-    .start(1000 + step*500)
+for display in displays
+  retreat(display).start().chain(enclose(display))
 
 camera.position.y = 100
 
