@@ -70,7 +70,6 @@ camera.position.y = 140
 # event handlers
 
 window.addEventListener('keyup', (e) ->
-  console.log(e.keyCode)
 
   if e.keyCode is 49
   	for display in displays
