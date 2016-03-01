@@ -81,7 +81,7 @@ retreat = (screen) ->
     .to({p: Math.PI*5/6, h: 40, d:-100 }, 3000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
-    .delay(Math.random()*250)
+    .delay(1000 + Math.random()*250)
 
   tween
 
@@ -97,10 +97,22 @@ enclose = (screen) ->
 
 surround = (screen) ->
 
-  tween = new TWEEN.Tween(screen.tween_load)
-    .to({p: 0, h: [0, -60], d: [-100, 130], r: -Math.PI/2}, 4000)
+  uno = new TWEEN.Tween(screen.tween_load)
+    .to({p: 0, d: -100}, 1000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
-    .delay(Math.random()*200)
 
-  tween
+  dos = new TWEEN.Tween(screen.tween_load)
+    .to({r: -Math.PI/2}, 1000)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+
+  tres = new TWEEN.Tween(screen.tween_load)
+    .to({h: -60, d: 130}, 2000)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+
+  uno.chain(dos)
+  dos.chain(tres)
+
+  uno

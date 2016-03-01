@@ -1,5 +1,5 @@
 
-# assumes threejs and tween js have been included prior
+# assumes threejs and tweenjs have been included prior
 
 clock = new THREE.Clock()
 scene = new THREE.Scene()
