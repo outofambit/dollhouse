@@ -21,7 +21,7 @@ enclose = (screen) ->
       .easing(TWEEN.Easing.Cubic.InOut)
       .delay(Math.random()*500)
 
-    due = new TWEEN.Tween(screen.tween_load)
+    deux = new TWEEN.Tween(screen.tween_load)
       .to({r: 0}, 750)
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Cubic.InOut)
@@ -31,8 +31,8 @@ enclose = (screen) ->
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Cubic.InOut)
 
-    un.chain due
-    due.chain trois
+    un.chain deux
+    deux.chain trois
 
     un
 
@@ -55,16 +55,22 @@ surround = (screen) ->
     .easing(TWEEN.Easing.Cubic.InOut)
 
   dos = new TWEEN.Tween(screen.tween_load)
-    .to({r: -Math.PI/2}, 750)
+    .to({p: 0, r: -Math.PI/2}, 1000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
 
   tres = new TWEEN.Tween(screen.tween_load)
-    .to({p: 0, h: -60, d: [0, -50, 130]}, 4000)
+    .to({h: -60}, 1500 + Math.random() * 500)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+
+  quatro = new TWEEN.Tween(screen.tween_load)
+    .to({d: 130}, 3000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
 
   uno.chain dos
   dos.chain tres
+  tres.chain quatro
 
   uno
