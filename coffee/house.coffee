@@ -7,7 +7,7 @@ camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight,
 
 controls = new THREE.FlyControls(camera)
 controls.movementSpeed = 500
-controls.rollSpeed = Math.PI / 12
+controls.rollSpeed = Math.PI / 3
 controls.dragToLook = true
 
 renderer = new THREE.WebGLRenderer({antialias: true})
@@ -63,9 +63,10 @@ for step in [0..ring_vertices_num-1]
   ds.setupTexture('media/slice' + (step+1) + '.png')
 
 for display in displays
-  retreat(display).start().chain(enclose(display))
+  # retreat(display).start().chain(enclose(display))
+  retreat(display).start().chain(surround(display))
 
-camera.position.y = 100
+camera.position.y = 140
 
 render = () ->
   requestAnimationFrame(render)

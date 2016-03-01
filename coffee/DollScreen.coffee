@@ -47,24 +47,31 @@ class DollScreen
     @_group_center_ray.applyAxisAngle(new THREE.Vector3(0, 1, 0), @_rotation_in_group)
     @mount.translateOnAxis(@_group_center_ray, ring_radius)
     @mount.lookAt @_group_center
+    # make tween_load for tweening later
     @tween_load = {
       s: @,
       p: @mesh.rotation.x,
       h: @mesh.position.y
       d: @mesh.position.z
+      r: @mesh.rotation.z
     }
 
   setupTexture: (path) ->
     loader = new THREE.TextureLoader()
     @screen.material.map = loader.load(path)
 
+  updateFromTweenLoad: () ->
+    @setScreenPitch @tween_load.p
+    @setScreenHeight @tween_load.h
+    @setScreenDepth @tween_load.d
+    @setScreenRoll @tween_load.r
+
+  # screen position/rotation setters
   setScreenDepth: (amount) -> @mesh.position.z = amount
-
   setScreenHeight: (amount) -> @mesh.position.y = amount
-
   setScreenYaw: (amount) -> @mesh.rotation.y = amount
-
   setScreenPitch: (amount) -> @mesh.rotation.x = amount
+  setScreenRoll: (angle) -> @mesh.rotation.z = angle
 
 # tweens for DollScreens
 
@@ -72,11 +79,7 @@ retreat = (screen) ->
 
   tween = new TWEEN.Tween(screen.tween_load)
     .to({p: Math.PI*5/6, h: 40, d:-100 }, 3000)
-    .onUpdate(() ->
-      @s.setScreenPitch @p
-      @s.setScreenHeight @h
-      @s.setScreenDepth @d
-      )
+    .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
     .delay(Math.random()*250)
 
@@ -86,12 +89,18 @@ enclose = (screen) ->
 
   tween = new TWEEN.Tween(screen.tween_load)
     .to({p: 0, h: -10, d: 0 }, 1000)
-    .onUpdate(() ->
-      @s.setScreenPitch @p
-      @s.setScreenHeight @h
-      @s.setScreenDepth @d
-      )
+    .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
     .delay(300 + Math.random()*500)
+
+  tween
+
+surround = (screen) ->
+
+  tween = new TWEEN.Tween(screen.tween_load)
+    .to({p: 0, h: [0, -60], d: [-100, 130], r: -Math.PI/2}, 4000)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+    .delay(Math.random()*200)
 
   tween
