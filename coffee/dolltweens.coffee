@@ -7,25 +7,50 @@ retreat = (screen) ->
     .to({p: Math.PI*5/6, h: 40, d:-100 }, 3000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
-    .delay(1000)
-    # .delay(1000 + Math.random()*250)
+    .delay(Math.random()*250)
 
   tween
 
 enclose = (screen) ->
 
-  tween = new TWEEN.Tween(screen.tween_load)
-    .to({p: 0, h: -10, d: 0 }, 1000)
-    .onUpdate(() -> @s.updateFromTweenLoad())
-    .easing(TWEEN.Easing.Cubic.InOut)
-    .delay(300 + Math.random()*500)
+  if screen.tween_load.r isnt 0
 
-  tween
+    un = new TWEEN.Tween(screen.tween_load)
+      .to({p: 0, h: -10, d: -100 }, 1000)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+      .delay(Math.random()*500)
+
+    due = new TWEEN.Tween(screen.tween_load)
+      .to({r: 0}, 750)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+
+    trois = new TWEEN.Tween(screen.tween_load)
+      .to({d: 0}, 1000)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+
+    un.chain due
+    due.chain trois
+
+    un
+
+  else
+
+    un = new TWEEN.Tween(screen.tween_load)
+      .to({p: 0, h: -10, d: 0}, 1000)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+      .delay(Math.random()*500)
+
+    un
+
 
 surround = (screen) ->
 
   uno = new TWEEN.Tween(screen.tween_load)
-    .to({d: -100}, 500)
+    .to({d: -100}, 1000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
 
@@ -35,11 +60,11 @@ surround = (screen) ->
     .easing(TWEEN.Easing.Cubic.InOut)
 
   tres = new TWEEN.Tween(screen.tween_load)
-    .to({p: 0, h: -60, d: [0, -50, 130]}, 3000)
+    .to({p: 0, h: -60, d: [0, -50, 130]}, 4000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
 
-  uno.chain(dos)
-  dos.chain(tres)
+  uno.chain dos
+  dos.chain tres
 
   uno
