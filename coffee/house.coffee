@@ -63,10 +63,27 @@ for step in [0..ring_vertices_num-1]
   ds.setupTexture('media/slice' + (step+1) + '.png')
 
 for display in displays
-  # retreat(display).start().chain(enclose(display))
-  retreat(display).start().chain(surround(display))
+  enclose(display).start()
 
 camera.position.y = 140
+
+# event handlers
+
+window.addEventListener('keyup', (e) ->
+  console.log(e.keyCode)
+
+  if e.keyCode is 49
+  	for display in displays
+      retreat(display).start()
+
+  if e.keyCode is 50
+  	for display in displays
+      enclose(display).start()
+
+  if e.keyCode is 51
+  	for display in displays
+      surround(display).start()
+  )
 
 render = () ->
   requestAnimationFrame(render)
