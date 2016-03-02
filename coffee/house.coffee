@@ -104,6 +104,10 @@ window.addEventListener('keyup', (e) ->
   	for display in displays
       surround_staggered(display).start()
 
+  if e.keyCode is 53
+  	for display in displays
+      surround_halves(display).start()
+
   )
 
 render = () ->

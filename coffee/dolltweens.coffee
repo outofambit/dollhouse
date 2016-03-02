@@ -108,3 +108,41 @@ surround_staggered = (screen) ->
   tres.chain quatro
 
   uno
+
+surround_halves = (screen) ->
+
+  base_dt = 0 if screen._rotation_in_group > Math.PI
+  base_dt = 2000 if screen._rotation_in_group < Math.PI
+
+  uno = new TWEEN.Tween(screen.tween_load)
+    .to({d: -100}, 1000)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+    .delay(base_dt)
+
+  dos = new TWEEN.Tween(screen.tween_load)
+    .to({p: 0, r: -Math.PI/2}, 1000)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+
+  dt = Math.random() * 500
+
+  tres = new TWEEN.Tween(screen.tween_load)
+    .to({h: -60}, 1000 + dt)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+
+  dt = -dt + 500
+  dt += screen._rotation_in_group/Math.PI*2 * 300
+
+  quatro = new TWEEN.Tween(screen.tween_load)
+    .to({d: 130}, 1500)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+    .delay(dt)
+
+  uno.chain dos
+  dos.chain tres
+  tres.chain quatro
+
+  uno
