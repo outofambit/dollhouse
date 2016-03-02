@@ -132,17 +132,12 @@ surround_halves = (screen) ->
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
 
-  dt = -dt + 500
-  dt += screen._rotation_in_group/Math.PI*2 * 300
-
   quatro = new TWEEN.Tween(screen.tween_load)
     .to({d: 130}, 1500)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
-    .delay(dt)
 
   uno.chain dos
-  dos.chain tres
-  tres.chain quatro
+  dos.chain tres, quatro
 
   uno
