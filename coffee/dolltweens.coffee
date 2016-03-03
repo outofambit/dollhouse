@@ -11,6 +11,32 @@ retreat = (screen) ->
 
   tween
 
+retreat_by_fives = (screen) ->
+
+  group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % 5
+
+  tween = new TWEEN.Tween(screen.tween_load)
+    .to({p: Math.PI*5/6, h: 40, d:-100 }, 2500)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+    .delay(group_num*500)
+
+  tween
+
+retreat_unzip = (screen) ->
+
+  group_size = 5
+  group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % group_size
+  group_num = Math.abs((group_size-1)/2 - group_num)
+
+  tween = new TWEEN.Tween(screen.tween_load)
+    .to({p: Math.PI*5/6, h: 40, d:-100 }, 2500)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+    .delay(group_num*750)
+
+  tween
+
 enclose = (screen) ->
 
   if screen.tween_load.r isnt 0
