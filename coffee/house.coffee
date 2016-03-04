@@ -90,7 +90,8 @@ window.addEventListener('keyup', (e) ->
 
   if e.keyCode is 49
   	for display in displays
-      retreat(display).start()
+      # retreat(display).start()
+      retreat_leader(display).start()
 
   if e.keyCode is 50
   	for display in displays
