@@ -30,7 +30,7 @@ up = new THREE.Vector3( 0, 1, 0 )
 # floor of the room
 floor_geom = new THREE.PlaneGeometry(100000, 100000)
 floor_mat = new THREE.MeshLambertMaterial({
-                  color: 0x999999,
+                  color: 0xcccccc,
                   side: THREE.DoubleSide,
                 })
 floor_mesh = new THREE.Mesh( floor_geom, floor_mat )
@@ -42,9 +42,9 @@ ring_radius = 310
 
 rail_geom = new THREE.TorusGeometry( ring_radius, 3, 6, 120 )
 rail_mat = new THREE.MeshPhongMaterial({
-                  color: 0x10101010,
-                  specular: 0x434343,
-                  shininess: 40,
+                  color: 0x909090,
+                  specular: 0xdddddd,
+                  shininess: 60,
                   side: THREE.FrontSide,
                   shading: THREE.SmoothShading,
                 })
