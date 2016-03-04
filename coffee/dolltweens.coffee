@@ -4,7 +4,7 @@
 retreat = (screen) ->
 
   tween = new TWEEN.Tween(screen.tween_load)
-    .to({p: Math.PI*5/6, h: 40, d:-100 }, 3000)
+    .to({p: Math.PI*5/6, h: 40, d:-150 }, 3000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
     .delay(Math.random()*250)
@@ -18,7 +18,7 @@ retreat_leader = (screen) ->
   group_num = Math.abs((group_size-1)/2 - group_num)
 
   tween = new TWEEN.Tween(screen.tween_load)
-    .to({p: Math.PI*5/6, h: 40, d:-100 }, 1500)
+    .to({p: Math.PI*5/6, h: 40, d:-150 }, 1500)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
     .delay(750 + group_num*300)
@@ -32,7 +32,7 @@ retreat_by_fives = (screen) ->
   group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % 5
 
   tween = new TWEEN.Tween(screen.tween_load)
-    .to({p: Math.PI*5/6, h: 40, d:-100 }, 2500)
+    .to({p: Math.PI*5/6, h: 40, d:-150 }, 2500)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
     .delay(group_num*500)
@@ -46,7 +46,7 @@ retreat_unzip = (screen) ->
   group_num = Math.abs((group_size-1)/2 - group_num)
 
   tween = new TWEEN.Tween(screen.tween_load)
-    .to({p: Math.PI*5/6, h: 40, d:-100 }, 2500)
+    .to({p: Math.PI*5/6, h: 40, d:-150 }, 2500)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
     .delay(group_num*750)
@@ -58,7 +58,7 @@ enclose = (screen) ->
   if screen.tween_load.r isnt 0
 
     un = new TWEEN.Tween(screen.tween_load)
-      .to({p: 0, h: -10, d: -100 }, 1000)
+      .to({p: 0, h: -10, d: -150 }, 1000)
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Cubic.InOut)
       .delay(Math.random()*500)
@@ -69,7 +69,7 @@ enclose = (screen) ->
       .easing(TWEEN.Easing.Cubic.InOut)
 
     trois = new TWEEN.Tween(screen.tween_load)
-      .to({d: 0}, 1000)
+      .to({d: -50}, 1000)
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Cubic.InOut)
 
@@ -81,7 +81,7 @@ enclose = (screen) ->
   else
 
     un = new TWEEN.Tween(screen.tween_load)
-      .to({p: 0, h: -10, d: 0}, 1000)
+      .to({p: 0, h: -10, d: -50}, 1000)
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Cubic.InOut)
       .delay(Math.random()*500)
@@ -92,7 +92,7 @@ enclose = (screen) ->
 surround = (screen) ->
 
   uno = new TWEEN.Tween(screen.tween_load)
-    .to({d: -100}, 1000)
+    .to({d: -150}, 1000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
 
@@ -107,7 +107,7 @@ surround = (screen) ->
     .easing(TWEEN.Easing.Cubic.InOut)
 
   quatro = new TWEEN.Tween(screen.tween_load)
-    .to({d: 130}, 3000)
+    .to({d: 80}, 3000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
 
@@ -120,7 +120,7 @@ surround = (screen) ->
 surround_staggered = (screen) ->
 
   uno = new TWEEN.Tween(screen.tween_load)
-    .to({d: -100}, 1000)
+    .to({d: -150}, 1000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
 
@@ -140,7 +140,7 @@ surround_staggered = (screen) ->
   dt += screen._rotation_in_group/Math.PI*2 * 300
 
   quatro = new TWEEN.Tween(screen.tween_load)
-    .to({d: 130}, 1500)
+    .to({d: 80}, 1500)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
     .delay(dt)
@@ -157,7 +157,7 @@ surround_halves = (screen) ->
   base_dt = 2000 if screen._rotation_in_group < Math.PI
 
   uno = new TWEEN.Tween(screen.tween_load)
-    .to({d: -100}, 1000)
+    .to({d: -150}, 1000)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
     .delay(base_dt)
@@ -175,7 +175,7 @@ surround_halves = (screen) ->
     .easing(TWEEN.Easing.Cubic.InOut)
 
   quatro = new TWEEN.Tween(screen.tween_load)
-    .to({d: 130}, 1500)
+    .to({d: 80}, 1500)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
 

@@ -38,7 +38,7 @@ floor_mesh.lookAt up
 floor_mesh.receiveShadow = true
 scene.add floor_mesh
 
-ring_radius = 310
+ring_radius = 257
 
 rail_geom = new THREE.TorusGeometry( ring_radius, 3, 6, 120 )
 rail_mat = new THREE.MeshPhongMaterial({
