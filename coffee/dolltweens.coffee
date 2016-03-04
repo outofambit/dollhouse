@@ -11,6 +11,22 @@ retreat = (screen) ->
 
   tween
 
+retreat_leader = (screen) ->
+
+  group_size = 7
+  group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % group_size
+  group_num = Math.abs((group_size-1)/2 - group_num)
+
+  tween = new TWEEN.Tween(screen.tween_load)
+    .to({p: Math.PI*5/6, h: 40, d:-100 }, 1500)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+    .delay(750 + group_num*300)
+
+  tween.delay(0) if group_num is 0
+
+  tween
+
 retreat_by_fives = (screen) ->
 
   group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % 5
