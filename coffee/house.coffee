@@ -11,6 +11,7 @@ controls.rollSpeed = Math.PI / 3
 controls.dragToLook = true
 
 renderer = new THREE.WebGLRenderer({antialias: true})
+renderer.setClearColor(0xeeeeee, 1)
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
@@ -27,22 +28,15 @@ up = new THREE.Vector3( 0, 1, 0 )
 # ALL MEASUREMENTS IN CM
 
 # floor of the room
-floor_geom = new THREE.PlaneGeometry(100000, 100000, 120, 120)
+floor_geom = new THREE.PlaneGeometry(100000, 100000)
 floor_mat = new THREE.MeshLambertMaterial({
-                  color: 0x202020,
+                  color: 0x999999,
                   side: THREE.DoubleSide,
                 })
 floor_mesh = new THREE.Mesh( floor_geom, floor_mat )
 floor_mesh.lookAt up
 floor_mesh.receiveShadow = true
 scene.add floor_mesh
-
-# ceiling
-ceil_mesh = new THREE.Mesh( floor_geom, floor_mat )
-ceil_mesh.position.y = 350
-floor_mesh.receiveShadow = true
-ceil_mesh.lookAt up
-scene.add ceil_mesh
 
 ring_radius = 310
 
