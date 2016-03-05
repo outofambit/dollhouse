@@ -12,6 +12,14 @@ module.exports = (grunt) ->
       }
     },
 
+    jade: {
+      compile: {
+        files: {
+          "index.html": ["jade/*.jade"]
+        }
+      }
+    },
+
     connect: {
       server: {
         options: {
@@ -30,8 +38,8 @@ module.exports = (grunt) ->
 
     watch: {
       scripts: {
-        files: ['coffee/*.coffee', '*.html'],
-        tasks: ['coffee'],
+        files: ['coffee/*.coffee', '*.html', 'jade/*.jade'],
+        tasks: ['coffee', 'jade'],
         options: {
           spawn: true,
           interrupt: true,
@@ -54,9 +62,10 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks('grunt-contrib-connect')
   grunt.loadNpmTasks('grunt-contrib-coffee')
+  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-coffee-jshint')
   grunt.loadNpmTasks('grunt-concurrent')
 
-  grunt.registerTask('default', ['coffee', 'connect:keepalive'])
+  grunt.registerTask('default', ['coffee', 'jade', 'connect:keepalive'])
   grunt.registerTask('dev', ['concurrent:dev'])
