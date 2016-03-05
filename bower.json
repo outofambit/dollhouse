@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "three.js": "threejs#*",
-    "tween.js": "tweenjs#^16.3.4"
+    "tween.js": "tweenjs#^16.3.4",
+    "bootstrap": "3.3.6"
   }
 }
