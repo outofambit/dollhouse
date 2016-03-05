@@ -2,8 +2,20 @@ doctype html
 html(lang="en")
   head
     title= Dollhouse
-    style body { margin: 0; }
+    link(rel='stylesheet' type='text/css' href='bower_components/bootstrap/dist/css/bootstrap.min.css')
   body
+    
+    nav.navbar.navbar-default.navbar-fixed-bottom
+      div.container-fluid
+        div.btn-toolbar(role="toolbar")
+          div.btn-group(role="group")
+            button.btn.navbar-btn.btn-default Retreat
+            button.btn.navbar-btn.btn-default Enclose
+            button.btn.navbar-btn.btn-default Surround
+          div.btn-group(role="group")
+            button.btn.navbar-btn.btn-default Fast
+            button.btn.navbar-btn.btn-default Slow
+    
     script(src='bower_components/three.js/build/three.min.js')
     script(src='bower_components/three.js/examples/js/controls/FlyControls.js')
     script(src='bower_components/tween.js/src/Tween.js')
