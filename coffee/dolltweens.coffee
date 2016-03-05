@@ -18,7 +18,7 @@ retreat_leader = (screen) ->
   group_num = Math.abs((group_size-1)/2 - group_num)
 
   tween = new TWEEN.Tween(screen.tween_load)
-    .to({p: Math.PI*5/6, h: 40, d:-150 }, 1500)
+    .to({p: Math.PI*5/6, h: 40, d:-100 }, 1500)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
     .delay(750 + group_num*300)
