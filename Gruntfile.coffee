@@ -2,6 +2,18 @@ module.exports = (grunt) ->
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+    uglify: {
+      deps: {
+        files: {
+          'deps.js': ['bower_components/three.js/build/three.min.js',
+                      'bower_components/three.js/examples/js/controls/FlyControls.js',
+                      'bower_components/tween.js/src/Tween.js',
+                      'compiled.js']
+        }
+      }
+    },
+
     coffee: {
       compile: {
         options: {
@@ -66,7 +78,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-coffee-jshint')
   grunt.loadNpmTasks('grunt-concurrent')
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('default', ['coffee', 'jade', 'connect:keepalive'])
+  grunt.registerTask('default', ['coffee', 'uglify', 'jade', 'connect:keepalive'])
   grunt.registerTask('dev', ['concurrent:dev'])
-  grunt.registerTask('heroku', ['coffee', 'jade', 'connect:server'])
+  grunt.registerTask('heroku', ['coffee', 'uglify', 'jade', 'connect:server'])
