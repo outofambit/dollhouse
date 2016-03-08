@@ -69,3 +69,4 @@ module.exports = (grunt) ->
 
   grunt.registerTask('default', ['coffee', 'jade', 'connect:keepalive'])
   grunt.registerTask('dev', ['concurrent:dev'])
+  grunt.registerTask('heroku', ['coffee', 'jade', 'connect:server'])
