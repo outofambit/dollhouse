@@ -23,7 +23,7 @@ module.exports = (grunt) ->
     connect: {
       server: {
         options: {
-          port: 9001,
+          port: process.env.PORT || 9001,
           keepalive: true
         }
       },
