@@ -239,9 +239,9 @@ quick_shake = (screen) ->
 
     # shake side to side
     dos = new TWEEN.Tween(screen.tween_load)
-      .to({y: screen.tween_load.y+Math.PI/12}, 200)
+      .to({y: screen.tween_load.y+Math.PI/12}, 400)
       .onUpdate(() -> @s.updateFromTweenLoad())
-      .easing(TWEEN.Easing.Cubic.InOut)
+      .easing(TWEEN.Easing.Quadratic.InOut)
 
     tres = new TWEEN.Tween(screen.tween_load)
       .to({y: screen.tween_load.y-Math.PI/24}, 100)
