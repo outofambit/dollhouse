@@ -1,9 +1,14 @@
 {
   "name": "dollhouse",
   "version": "0.0.1",
-  "description": "",
+  "description": "animation prototype for the dataspace",
+  "repository" : {
+    "type" : "git",
+    "url" : "gitlab:outofambit/dollhouse.git"
+  },
   "engines": {
-    "node": "5.7.0"
+    "node": "5.7.0",
+    "npm": "3.6.0"
   },
   "main": "index.html",
   "scripts": {
