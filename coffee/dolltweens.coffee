@@ -280,12 +280,12 @@ quick_wave_hi = (screen) ->
 
     # shake side to side
     dos = new TWEEN.Tween(screen.tween_load)
-      .to({r: return_load.y+Math.PI/16}, 400)
+      .to({r: return_load.r+Math.PI/16}, 400)
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Quadratic.InOut)
 
     tres = new TWEEN.Tween(screen.tween_load)
-      .to({r: return_load.y-Math.PI/16}, 100)
+      .to({r: return_load.r-Math.PI/16}, 100)
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Cubic.InOut)
       .yoyo(true)
