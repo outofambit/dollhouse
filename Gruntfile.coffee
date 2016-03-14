@@ -51,7 +51,7 @@ module.exports = (grunt) ->
     watch: {
       scripts: {
         files: ['coffee/*.coffee', 'jade/*.jade'],
-        tasks: ['coffee', 'jade'],
+        tasks: ['coffee', 'uglify', 'jade'],
         options: {
           spawn: true,
           interrupt: true,
