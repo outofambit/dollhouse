@@ -80,31 +80,6 @@ camera.position.y = 140
 
 # event handlers
 
-window.addEventListener('keyup', (e) ->
-
-  if e.keyCode is 49
-  	for display in displays
-      # retreat(display).start()
-      retreat_leader(display).start()
-
-  if e.keyCode is 50
-  	for display in displays
-      enclose(display).start()
-
-  if e.keyCode is 51
-  	for display in displays
-      surround(display).start()
-
-  if e.keyCode is 52
-  	for display in displays
-      surround_staggered(display).start()
-
-  if e.keyCode is 53
-  	for display in displays
-      surround_halves(display).start()
-
-  )
-
 document.getElementById('surround-btn').onclick = () ->
   for display in displays
     surround_leader(display).start()
