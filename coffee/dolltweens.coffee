@@ -241,16 +241,16 @@ alternating = (screen) ->
 
   # shake side to side
   dos = new TWEEN.Tween(screen.tween_load)
-    .to({y: return_load.y+Math.PI/12}, 400)
+    .to({y: return_load.y+Math.PI/12, r: return_load.r+Math.PI/64}, 400)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Quadratic.InOut)
 
   tres = new TWEEN.Tween(screen.tween_load)
-    .to({y: return_load.y-Math.PI/12}, 100)
+    .to({y: return_load.y-Math.PI/12, r: return_load.r-Math.PI/64}, 150)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
     .yoyo(true)
-    .repeat(5)
+    .repeat(3)
 
   # return
   quatro = new TWEEN.Tween(screen.tween_load)
