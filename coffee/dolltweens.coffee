@@ -233,22 +233,63 @@ quick_shake = (screen) ->
 
     # come a little forward
     uno = new TWEEN.Tween(screen.tween_load)
-      .to({d: screen.tween_load.d + 30, p: screen.tween_load.p+Math.PI/6}, 400)
+      .to({d: return_load.d + 30, p: screen.tween_load.p+Math.PI/6}, 400)
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Cubic.InOut)
 
     # shake side to side
     dos = new TWEEN.Tween(screen.tween_load)
-      .to({y: screen.tween_load.y+Math.PI/12}, 400)
+      .to({y: return_load.y+Math.PI/12}, 400)
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Quadratic.InOut)
 
     tres = new TWEEN.Tween(screen.tween_load)
-      .to({y: screen.tween_load.y-Math.PI/24}, 100)
+      .to({y: return_load.y-Math.PI/12}, 100)
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Cubic.InOut)
       .yoyo(true)
       .repeat(5)
+
+    # return
+    quatro = new TWEEN.Tween(screen.tween_load)
+      .to(return_load, 400)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+
+    uno.chain dos
+    dos.chain tres
+    tres.chain quatro
+
+    return uno
+
+  new TWEEN.Tween()
+
+quick_wave_hi = (screen) ->
+
+  group_num = figureScreenGroup(screen, 7)
+
+  return_load = Object.assign({}, screen.tween_load)
+
+  if group_num is 0
+
+    # come a little forward
+    uno = new TWEEN.Tween(screen.tween_load)
+      .to({d: screen.tween_load.d + 30}, 400)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+
+    # shake side to side
+    dos = new TWEEN.Tween(screen.tween_load)
+      .to({r: return_load.y+Math.PI/16}, 400)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Quadratic.InOut)
+
+    tres = new TWEEN.Tween(screen.tween_load)
+      .to({r: return_load.y-Math.PI/16}, 100)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+      .yoyo(true)
+      .repeat(7)
 
     # return
     quatro = new TWEEN.Tween(screen.tween_load)

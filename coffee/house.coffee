@@ -121,6 +121,11 @@ document.getElementById('shake-btn').onclick = () ->
   for display in displays
     quick_shake(display).start()
 
+document.getElementById('wave-btn').onclick = () ->
+  for display in displays
+    quick_wave_hi(display).start()
+
+
 render = () ->
   requestAnimationFrame(render)
   renderer.render(scene, camera)
