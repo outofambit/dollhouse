@@ -54,6 +54,7 @@ class DollScreen
       h: @mesh.position.y
       d: @mesh.position.z
       r: @mesh.rotation.z
+      y: @mesh.rotation.y
     }
 
   setupTexture: (path) ->
@@ -65,6 +66,7 @@ class DollScreen
     @setScreenHeight @tween_load.h
     @setScreenDepth @tween_load.d
     @setScreenRoll @tween_load.r
+    @setScreenYaw @tween_load.y
 
   # screen position/rotation setters
   setScreenDepth: (amount) -> @mesh.position.z = amount

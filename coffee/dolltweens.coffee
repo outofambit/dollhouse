@@ -1,6 +1,8 @@
 
 # tweens for DollScreens
 
+# RETREAT
+
 retreat = (screen) ->
 
   tween = new TWEEN.Tween(screen.tween_load)
@@ -53,6 +55,8 @@ retreat_unzip = (screen) ->
 
   tween
 
+# ENCLOSE
+
 enclose = (screen) ->
 
   if screen.tween_load.r isnt 0
@@ -88,6 +92,7 @@ enclose = (screen) ->
 
     un
 
+# SURROUND
 
 surround = (screen) ->
 
@@ -214,9 +219,53 @@ surround_leader = (screen) ->
   uno.chain dos
   dos.chain tres, quatro
 
-  # uno.delay(0) if group_num is 0
-
   uno
+
+# SHAKE
+
+quick_shake = (screen) ->
+
+  group_num = figureScreenGroup(screen, 7)
+
+  return_load = Object.assign({}, screen.tween_load)
+
+  if group_num is 0
+
+    # come a little forward
+    uno = new TWEEN.Tween(screen.tween_load)
+      .to({d: screen.tween_load.d + 30, p: screen.tween_load.p+Math.PI/6}, 400)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+
+    # shake side to side
+    dos = new TWEEN.Tween(screen.tween_load)
+      .to({y: screen.tween_load.y+Math.PI/12}, 200)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+
+    tres = new TWEEN.Tween(screen.tween_load)
+      .to({y: screen.tween_load.y-Math.PI/24}, 100)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+      .yoyo(true)
+      .repeat(5)
+
+    # return
+    quatro = new TWEEN.Tween(screen.tween_load)
+      .to(return_load, 400)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+
+    uno.chain dos
+    dos.chain tres
+    tres.chain quatro
+
+    return uno
+
+  new TWEEN.Tween()
+
+
+# GENERAL UTILITIES
 
 figureScreenGroup = (screen, group_size) ->
   group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % group_size
