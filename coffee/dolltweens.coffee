@@ -221,6 +221,49 @@ surround_leader = (screen) ->
 
   uno
 
+# ALTERNATING SOMETHING OR ANOTHER
+
+alternating = (screen) ->
+
+  group_num = figureScreenGroup(screen, 2)
+
+  return_load = Object.assign({}, screen.tween_load)
+
+  # come a little forward (or back)
+  uno_to = {
+    d: if group_num is 0 then return_load.d + 15 else return_load.d - 15,
+    p: if group_num is 0 then return_load.p+Math.PI/18 else return_load.p-Math.PI/18
+  }
+  uno = new TWEEN.Tween(screen.tween_load)
+    .to(uno_to, 400)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+
+  # shake side to side
+  dos = new TWEEN.Tween(screen.tween_load)
+    .to({y: return_load.y+Math.PI/12}, 400)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Quadratic.InOut)
+
+  tres = new TWEEN.Tween(screen.tween_load)
+    .to({y: return_load.y-Math.PI/12}, 100)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+    .yoyo(true)
+    .repeat(5)
+
+  # return
+  quatro = new TWEEN.Tween(screen.tween_load)
+    .to(return_load, 400)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+
+  uno.chain dos
+  dos.chain tres
+  tres.chain quatro
+
+  uno
+
 # SHAKE
 
 quick_shake = (screen) ->
@@ -263,6 +306,7 @@ quick_shake = (screen) ->
     return uno
 
   new TWEEN.Tween()
+
 
 quick_wave_hi = (screen) ->
 
@@ -309,5 +353,11 @@ quick_wave_hi = (screen) ->
 # GENERAL UTILITIES
 
 figureScreenGroup = (screen, group_size) ->
+
   group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % group_size
   group_num = Math.abs((group_size-1)/2 - group_num)
+
+  if group_size is 2
+    group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % group_size
+
+  group_num

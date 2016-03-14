@@ -92,6 +92,10 @@ document.getElementById('retreat-btn').onclick = () ->
   for display in displays
     retreat_leader(display).start()
 
+document.getElementById('alt-btn').onclick = () ->
+  for display in displays
+    alternating(display).start()
+
 document.getElementById('shake-btn').onclick = () ->
   for display in displays
     quick_shake(display).start()
