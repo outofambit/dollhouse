@@ -107,7 +107,7 @@ window.addEventListener('keyup', (e) ->
 
 document.getElementById('surround-btn').onclick = () ->
   for display in displays
-    surround_halves(display).start()
+    surround_leader(display).start()
 
 document.getElementById('enclose-btn').onclick = () ->
   for display in displays
@@ -115,7 +115,7 @@ document.getElementById('enclose-btn').onclick = () ->
 
 document.getElementById('retreat-btn').onclick = () ->
   for display in displays
-    retreat_leader(display).start()    
+    retreat_leader(display).start()
 
 render = () ->
   requestAnimationFrame(render)

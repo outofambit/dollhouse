@@ -183,3 +183,41 @@ surround_halves = (screen) ->
   dos.chain tres, quatro
 
   uno
+
+surround_leader = (screen) ->
+
+  group_num = figureScreenGroup(screen, 7)
+
+  uno = new TWEEN.Tween(screen.tween_load)
+    .to({d: -150}, 1000)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+    .delay(if group_num is 0 then 0 else (2000 + (group_num * 200)))
+
+  dos = new TWEEN.Tween(screen.tween_load)
+    .to({p: 0, r: -Math.PI/2}, 1000)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+
+  dt = Math.random() * 500
+
+  tres = new TWEEN.Tween(screen.tween_load)
+    .to({h: -60}, 1000 + dt)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+
+  quatro = new TWEEN.Tween(screen.tween_load)
+    .to({d: 80}, 1500)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Cubic.InOut)
+
+  uno.chain dos
+  dos.chain tres, quatro
+
+  # uno.delay(0) if group_num is 0
+
+  uno
+
+figureScreenGroup = (screen, group_size) ->
+  group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % group_size
+  group_num = Math.abs((group_size-1)/2 - group_num)
