@@ -476,7 +476,7 @@ realisticScreenTween = (screen, goal) ->
     if d > big_diff then big_diff = d
 
   # screen speed in cm/s
-  speed = 10
+  speed = 25
   dur = big_diff/speed
   # s to ms
   dur *= 1000
