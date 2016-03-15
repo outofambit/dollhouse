@@ -112,6 +112,9 @@ document.getElementById('wave-btn').onclick = () ->
   for display in displays
     quick_wave_hi(display).start()
 
+document.getElementById('look-btn').onclick = () ->
+  for display in displays
+    quick_look(display).start()
 
 render = () ->
   requestAnimationFrame(render)

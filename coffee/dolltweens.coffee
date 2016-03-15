@@ -367,6 +367,48 @@ quick_wave_hi = (screen) ->
 
   new TWEEN.Tween()
 
+quick_look = (screen) ->
+
+  nth = figureScreenGroupOrder(screen, 7)
+
+  return_load = Object.assign({}, screen.tween_load)
+
+  if nth is 0
+
+    uno = new TWEEN.Tween(screen.tween_load)
+      .to(d: return_load.d + 20, 200)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+      .delay(400)
+
+    # come out and look to side
+    dos = new TWEEN.Tween(screen.tween_load)
+      .to({d: return_load.d + 60, y: return_load.y+Math.PI/4, rg: return_load.rg-Math.PI/16}, 600)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Quadratic.InOut)
+
+    # look to other side
+    tres = new TWEEN.Tween(screen.tween_load)
+      .to({y: return_load.y-Math.PI/4, rg: return_load.rg+Math.PI/16}, 600)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .delay(500)
+
+    # return
+    quatro = new TWEEN.Tween(screen.tween_load)
+      .to(return_load, 400)
+      .onUpdate(() -> @s.updateFromTweenLoad())
+      .easing(TWEEN.Easing.Cubic.InOut)
+      .delay(200)
+
+    uno.chain dos
+    dos.chain tres
+    tres.chain quatro
+
+    return uno
+
+  new TWEEN.Tween()
+
 
 # GENERAL UTILITIES
 
