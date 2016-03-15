@@ -3,7 +3,7 @@
 
 clock = new THREE.Clock()
 scene = new THREE.Scene()
-camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000)
+camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 2000)
 
 controls = new THREE.FlyControls(camera)
 controls.movementSpeed = 500
