@@ -412,6 +412,25 @@ quick_look = (screen) ->
 
 # GENERAL UTILITIES
 
+realisticScreenTween = (start, goal) ->
+
+  # assumes that start and goal have the same keys
+  big_diff = 0
+  for key, value of goal
+    d = Math.abs(value - start.key)
+    if d > diff then diff = d
+
+  # screen speed in cm/s
+  speed = 1000
+  dur = big_diff/speed
+  # s to ms
+  dur *= 1000
+
+  tween = new TWEEN.Tween(goal)
+    .to(goal, dur)
+    .onUpdate(() -> @s.updateFromTweenLoad())
+    .easing(TWEEN.Easing.Quadratic.InOut)
+
 figureScreenGroup = (screen, group_size) ->
 
   group_num = Math.floor(((screen._rotation_in_group / (Math.PI*2)) * 15) / group_size)
