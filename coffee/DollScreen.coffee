@@ -39,22 +39,17 @@ class DollScreen
     @screen.translateZ(1.5)
     @mesh.add @screen
 
-  setupPosition: (@_group_center, radius, @_rotation_in_group) ->
-    @mount.translateX @_group_center.x
-    @mount.translateY @_group_center.y
-    @mount.translateZ @_group_center.z
-    @_group_center_ray = new THREE.Vector3(0, 0, -1)
-    @_group_center_ray.applyAxisAngle(new THREE.Vector3(0, 1, 0), @_rotation_in_group)
-    @mount.translateOnAxis(@_group_center_ray, ring_radius)
-    @mount.lookAt @_group_center
+  setupPosition: (@_group_center, @_radius_of_group, @_rotation_in_group) ->
+    @setRotationInGroup(@_rotation_in_group)
     # make tween_load for tweening later
     @tween_load = {
       s: @,
       p: @mesh.rotation.x,
-      h: @mesh.position.y
-      d: @mesh.position.z
-      r: @mesh.rotation.z
-      y: @mesh.rotation.y
+      h: @mesh.position.y,
+      d: @mesh.position.z,
+      r: @mesh.rotation.z,
+      y: @mesh.rotation.y,
+      rg: @_rotation_in_group
     }
 
   setupTexture: (path) ->
@@ -62,11 +57,13 @@ class DollScreen
     @screen.material.map = loader.load(path)
 
   updateFromTweenLoad: () ->
+    @setRotationInGroup @tween_load.rg
     @setScreenPitch @tween_load.p
     @setScreenHeight @tween_load.h
     @setScreenDepth @tween_load.d
     @setScreenRoll @tween_load.r
     @setScreenYaw @tween_load.y
+
 
   # screen position/rotation setters
   setScreenDepth: (amount) -> @mesh.position.z = amount
@@ -74,3 +71,11 @@ class DollScreen
   setScreenYaw: (amount) -> @mesh.rotation.y = amount
   setScreenPitch: (amount) -> @mesh.rotation.x = amount
   setScreenRoll: (angle) -> @mesh.rotation.z = angle
+  # only call after you've called setupPosition()
+  setRotationInGroup: (rotation_in_group) ->
+    @mount.position.set(@_group_center.x, @_group_center.y, @_group_center.z)
+    @mount.setRotationFromEuler(new THREE.Euler(0, 0, 0))
+    group_center_ray = new THREE.Vector3(0, 0, -1)
+    group_center_ray.applyAxisAngle(new THREE.Vector3(0, 1, 0), rotation_in_group)
+    @mount.translateOnAxis(group_center_ray, @_radius_of_group)
+    @mount.lookAt @_group_center
