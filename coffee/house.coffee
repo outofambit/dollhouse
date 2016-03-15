@@ -81,49 +81,51 @@ for display in displays
 
 camera.position.y = 140
 
+real_speed = false
+
 # event handlers
 
+document.getElementById('nat-btn').onclick = () ->
+  real_speed = false
+document.getElementById('rea-btn').onclick = () ->
+  real_speed = true
+
+all_do = (f) ->
+  for d in displays
+    f(d).start()
+
 document.getElementById('surround-btn').onclick = () ->
-  for display in displays
-    surround_leader(display).start()
+  if not real_speed then all_do surround_leader else all_do surround_real
 
 document.getElementById('enclose-btn').onclick = () ->
-  for display in displays
-    enclose(display).start()
+  if not real_speed then all_do enclose else all_do enclose_real
 
 document.getElementById('retreat-btn').onclick = () ->
-  for display in displays
-    retreat_leader(display).start()
+  if not real_speed then all_do retreat_leader else all_do retreat_real
 
 document.getElementById('alcen-btn').onclick = () ->
-  for display in displays
-    alcove_verticals(display).start()
+  if not real_speed then all_do alcove_verticals else
 
 document.getElementById('alcsur-btn').onclick = () ->
-  for display in displays
-    alcove_horizontals(display).start()
+  if not real_speed then all_do alcove_horizontals else
 
 document.getElementById('alt-btn').onclick = () ->
-  for display in displays
-    alternating(display).start()
+  if not real_speed then all_do alternating else
 
 document.getElementById('shake-btn').onclick = () ->
-  for display in displays
-    quick_shake(display).start()
+  if not real_speed then all_do quick_shake else
 
 document.getElementById('wave-btn').onclick = () ->
-  for display in displays
-    quick_wave_hi(display).start()
+  if not real_speed then all_do quick_wave_hi else
 
 document.getElementById('look-btn').onclick = () ->
-  for display in displays
-    quick_look(display).start()
+  if not real_speed then all_do quick_look else
 
-window.addEventListener( 'deviceorientation', () ->
+window.addEventListener('deviceorientation', () ->
     orient_controls_update = true
   , false );
 
-window.addEventListener( 'orientationchange', () ->
+window.addEventListener('orientationchange', () ->
     camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix()
     renderer.setSize(window.innerWidth, window.innerHeight)
