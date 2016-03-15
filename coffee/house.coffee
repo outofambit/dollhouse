@@ -125,6 +125,18 @@ window.addEventListener( 'deviceorientation', () ->
     orient_controls_update = true
   , false );
 
+window.addEventListener( 'orientationchange', () ->
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+    renderer.setSize(window.innerWidth, window.innerHeight)
+  , false );
+
+window.addEventListener('resize', () ->
+		camera.aspect = window.innerWidth / window.innerHeight
+		camera.updateProjectionMatrix()
+		renderer.setSize(window.innerWidth, window.innerHeight)
+	, false);
+
 render = () ->
   requestAnimationFrame(render)
   renderer.render(scene, camera)
