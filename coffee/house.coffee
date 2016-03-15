@@ -10,6 +10,9 @@ controls.movementSpeed = 500
 controls.rollSpeed = Math.PI / 3
 controls.dragToLook = true
 
+orient_controls = new THREE.DeviceOrientationControls(camera)
+orient_controls_update = false
+
 renderer = new THREE.WebGLRenderer({antialias: true})
 renderer.setClearColor(0xeeeeee, 1)
 renderer.setSize(window.innerWidth, window.innerHeight)
@@ -116,6 +119,10 @@ document.getElementById('look-btn').onclick = () ->
   for display in displays
     quick_look(display).start()
 
+window.addEventListener( 'deviceorientation', () ->
+    orient_controls_update = true
+  , false );
+
 render = () ->
   requestAnimationFrame(render)
   renderer.render(scene, camera)
@@ -126,6 +133,7 @@ animate = (time) ->
 
   delta = clock.getDelta()
   controls.update(delta)
+  if orient_controls_update then orient_controls.update()
 
 animate()
 render()

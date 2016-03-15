@@ -8,6 +8,7 @@ module.exports = (grunt) ->
         files: {
           'deps.js': ['bower_components/three.js/build/three.min.js',
                       'bower_components/three.js/examples/js/controls/FlyControls.js',
+                      'bower_components/three.js/examples/js/controls/DeviceOrientationControls.js',
                       'bower_components/tween.js/src/Tween.js',
                       'compiled.js']
         }
