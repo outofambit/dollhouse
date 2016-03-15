@@ -191,7 +191,7 @@ surround_halves = (screen) ->
 
 surround_leader = (screen) ->
 
-  group_num = figureScreenGroup(screen, 7)
+  group_num = figureScreenGroupOrder(screen, 7)
 
   uno = new TWEEN.Tween(screen.tween_load)
     .to({d: -150}, 1000)
@@ -221,11 +221,29 @@ surround_leader = (screen) ->
 
   uno
 
+# ALCOVE FORMATION
+
+alcove_verticals = (screen) ->
+
+  group = figureScreenGroup(screen, 7)
+  group_nth = figureScreenGroupOrder(screen, 7)
+
+  if group is 0 then enclose(screen)
+  else retreat_unzip(screen)
+
+alcove_horizontals = (screen) ->
+
+  group = figureScreenGroup(screen, 7)
+  group_nth = figureScreenGroupOrder(screen, 7)
+
+  if group is 0 then surround_leader(screen)
+  else retreat_unzip(screen)
+
 # ALTERNATING SOMETHING OR ANOTHER
 
 alternating = (screen) ->
 
-  group_num = figureScreenGroup(screen, 2)
+  group_num = figureScreenGroupOrder(screen, 2)
 
   return_load = Object.assign({}, screen.tween_load)
 
@@ -268,7 +286,7 @@ alternating = (screen) ->
 
 quick_shake = (screen) ->
 
-  group_num = figureScreenGroup(screen, 7)
+  group_num = figureScreenGroupOrder(screen, 7)
 
   return_load = Object.assign({}, screen.tween_load)
 
@@ -310,7 +328,7 @@ quick_shake = (screen) ->
 
 quick_wave_hi = (screen) ->
 
-  group_num = figureScreenGroup(screen, 7)
+  group_num = figureScreenGroupOrder(screen, 7)
 
   return_load = Object.assign({}, screen.tween_load)
 
@@ -353,6 +371,10 @@ quick_wave_hi = (screen) ->
 # GENERAL UTILITIES
 
 figureScreenGroup = (screen, group_size) ->
+
+  group_num = Math.floor(((screen._rotation_in_group / (Math.PI*2)) * 15) / group_size)
+
+figureScreenGroupOrder = (screen, group_size) ->
 
   group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % group_size
   group_num = Math.abs((group_size-1)/2 - group_num)

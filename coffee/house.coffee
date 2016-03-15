@@ -92,6 +92,14 @@ document.getElementById('retreat-btn').onclick = () ->
   for display in displays
     retreat_leader(display).start()
 
+document.getElementById('alcen-btn').onclick = () ->
+  for display in displays
+    alcove_verticals(display).start()
+
+document.getElementById('alcsur-btn').onclick = () ->
+  for display in displays
+    alcove_horizontals(display).start()
+
 document.getElementById('alt-btn').onclick = () ->
   for display in displays
     alternating(display).start()
