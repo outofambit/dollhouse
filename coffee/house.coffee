@@ -4,8 +4,6 @@
 clock = new THREE.Clock()
 scene = new THREE.Scene()
 camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000)
-camera.zoom = 0.8
-camera.updateProjectionMatrix()
 
 controls = new THREE.FlyControls(camera)
 controls.movementSpeed = 500
