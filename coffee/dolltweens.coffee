@@ -55,6 +55,17 @@ retreat_unzip = (screen) ->
 
   tween
 
+retreat_real = (screen) ->
+
+  group_size = 5
+  group_num = ((screen._rotation_in_group / (Math.PI*2)) * 15) % group_size
+  group_num = Math.abs((group_size-1)/2 - group_num)
+
+  tween = realisticScreenTween(screen, {p: Math.PI*5/6, h: 40, d:-150 })
+    .delay(group_num*750)
+
+  tween
+
 # ENCLOSE
 
 enclose = (screen) ->
@@ -88,6 +99,29 @@ enclose = (screen) ->
       .to({p: 0, h: -10, d: -50}, 1000)
       .onUpdate(() -> @s.updateFromTweenLoad())
       .easing(TWEEN.Easing.Cubic.InOut)
+      .delay(Math.random()*500)
+
+    un
+
+enclose_real = (screen) ->
+
+  if screen.tween_load.r isnt 0
+
+    un = realisticScreenTween(screen, {p: 0, h: -10, d: -150 })
+      .delay(Math.random()*500)
+
+    deux = realisticScreenTween(screen, {r: 0})
+
+    trois = realisticScreenTween(screen, {d: -50})
+
+    un.chain deux
+    deux.chain trois
+
+    un
+
+  else
+
+    un = realisticScreenTween(screen, {p: 0, h: -10, d: -50})
       .delay(Math.random()*500)
 
     un
@@ -215,6 +249,26 @@ surround_leader = (screen) ->
     .to({d: 80}, 1500)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Cubic.InOut)
+
+  uno.chain dos
+  dos.chain tres, quatro
+
+  uno
+
+surround_real = (screen) ->
+
+  group_num = figureScreenGroupOrder(screen, 7)
+
+  uno = realisticScreenTween(screen, {d: -150})
+    .delay(if group_num is 0 then 0 else (2000 + (group_num * 200)))
+
+  dos = realisticScreenTween(screen, {p: 0, r: -Math.PI/2})
+
+  dt = Math.random() * 500
+
+  tres = realisticScreenTween(screen, {h: -60})
+
+  quatro = realisticScreenTween(screen, {d: 80})
 
   uno.chain dos
   dos.chain tres, quatro
@@ -412,24 +466,27 @@ quick_look = (screen) ->
 
 # GENERAL UTILITIES
 
-realisticScreenTween = (start, goal) ->
+realisticScreenTween = (screen, goal) ->
 
-  # assumes that start and goal have the same keys
+  start = screen.tween_load
+
   big_diff = 0
   for key, value of goal
-    d = Math.abs(value - start.key)
-    if d > diff then diff = d
+    d = Math.abs(goal[key] - start[key])
+    if d > big_diff then big_diff = d
 
   # screen speed in cm/s
-  speed = 1000
+  speed = 10
   dur = big_diff/speed
   # s to ms
   dur *= 1000
 
-  tween = new TWEEN.Tween(goal)
+  tween = new TWEEN.Tween(start)
     .to(goal, dur)
     .onUpdate(() -> @s.updateFromTweenLoad())
     .easing(TWEEN.Easing.Quadratic.InOut)
+
+  tween
 
 figureScreenGroup = (screen, group_size) ->
 
