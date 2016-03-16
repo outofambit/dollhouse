@@ -492,6 +492,10 @@ realisticScreenTween = (screen, goal) ->
     d = Math.abs(goal[key] - start[key])
     if d > big_diff then big_diff = d
 
+  # here's a crappy hack to get reasonable speed for rotations
+  if big_diff < Math.PI*2.25 and big_diff < Math.PI*2.25
+    big_diff *= 25
+
   # screen speed in cm/s
   speed = 25
   dur = big_diff/speed
@@ -501,7 +505,7 @@ realisticScreenTween = (screen, goal) ->
   tween = new TWEEN.Tween(start)
     .to(goal, dur)
     .onUpdate(() -> @s.updateFromTweenLoad())
-    .easing(TWEEN.Easing.Quadratic.InOut)
+    .easing(TWEEN.Easing.Cubic.InOut)
 
   tween
 
