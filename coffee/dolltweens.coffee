@@ -293,6 +293,23 @@ alcove_horizontals = (screen) ->
   if group is 0 then surround_leader(screen)
   else retreat_unzip(screen)
 
+alcove_verticals_real = (screen) ->
+
+  group = figureScreenGroup(screen, 7)
+  group_nth = figureScreenGroupOrder(screen, 7)
+
+  if group is 0 then enclose_real(screen)
+  else retreat_real(screen)
+
+alcove_horizontals_real = (screen) ->
+
+  group = figureScreenGroup(screen, 7)
+  group_nth = figureScreenGroupOrder(screen, 7)
+
+  if group is 0 then surround_real(screen)
+  else retreat_real(screen)
+
+
 # ALTERNATING SOMETHING OR ANOTHER
 
 alternating = (screen) ->

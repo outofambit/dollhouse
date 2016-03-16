@@ -104,10 +104,12 @@ document.getElementById('retreat-btn').onclick = () ->
   if not real_speed then all_do retreat_leader else all_do retreat_real
 
 document.getElementById('alcen-btn').onclick = () ->
-  if not real_speed then all_do alcove_verticals else
+  if not real_speed then all_do alcove_verticals
+  else all_do alcove_verticals_real
 
 document.getElementById('alcsur-btn').onclick = () ->
-  if not real_speed then all_do alcove_horizontals else
+  if not real_speed then all_do alcove_horizontals
+  else all_do alcove_horizontals_real
 
 document.getElementById('alt-btn').onclick = () ->
   if not real_speed then all_do alternating else
