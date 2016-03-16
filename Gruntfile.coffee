@@ -6,11 +6,11 @@ module.exports = (grunt) ->
     uglify: {
       deps: {
         files: {
-          'deps.js': ['bower_components/three.js/build/three.min.js',
-                      'bower_components/three.js/examples/js/controls/FlyControls.js',
-                      'bower_components/three.js/examples/js/controls/DeviceOrientationControls.js',
-                      'bower_components/tween.js/src/Tween.js',
-                      'compiled.js']
+          'public/deps.js': ['bower_components/three.js/build/three.min.js',
+                            'bower_components/three.js/examples/js/controls/FlyControls.js',
+                            'bower_components/three.js/examples/js/controls/DeviceOrientationControls.js',
+                            'bower_components/tween.js/src/Tween.js',
+                            'compiled.js']
         }
       }
     },
@@ -28,7 +28,15 @@ module.exports = (grunt) ->
     jade: {
       compile: {
         files: {
-          "index.html": ["jade/*.jade"]
+          'public/index.html': ['jade/*.jade']
+        }
+      }
+    },
+
+    cssmin: {
+      target: {
+        files: {
+          'public/mini.css': ['bower_components/bootstrap/dist/css/bootstrap.css']
         }
       }
     },
@@ -37,14 +45,16 @@ module.exports = (grunt) ->
       server: {
         options: {
           port: process.env.PORT || 9001,
-          keepalive: true
+          keepalive: true,
+          base: 'public/'
         }
       },
       keepalive: {
         options: {
           port: 9001,
           open: true,
-          keepalive: true
+          keepalive: true,
+          base: 'public/'
         }
       }
     },
@@ -52,7 +62,7 @@ module.exports = (grunt) ->
     watch: {
       scripts: {
         files: ['coffee/*.coffee', 'jade/*.jade'],
-        tasks: ['coffee', 'uglify', 'jade'],
+        tasks: ['coffee', 'uglify', 'cssmin', 'jade'],
         options: {
           spawn: true,
           interrupt: true,
@@ -80,7 +90,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-coffee-jshint')
   grunt.loadNpmTasks('grunt-concurrent')
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('default', ['coffee', 'uglify', 'jade', 'connect:keepalive'])
+  grunt.registerTask('default', ['coffee', 'uglify', 'cssmin', 'jade', 'connect:keepalive'])
   grunt.registerTask('dev', ['concurrent:dev'])
-  grunt.registerTask('heroku', ['coffee', 'uglify', 'jade', 'connect:server'])
+  grunt.registerTask('heroku', ['coffee', 'uglify', 'cssmin', 'jade', 'connect:server'])
