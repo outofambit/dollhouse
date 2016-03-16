@@ -10,8 +10,8 @@ controls.movementSpeed = 500
 controls.rollSpeed = Math.PI / 3
 controls.dragToLook = true
 
-orient_controls = new THREE.DeviceOrientationControls(camera)
-orient_controls_update = false
+orient_controls = {}
+should_use_orient_controls = false
 
 renderer = new THREE.WebGLRenderer({antialias: true})
 renderer.setClearColor(0xeeeeee, 1)
@@ -125,8 +125,10 @@ document.getElementById('look-btn').onclick = () ->
 
 # hack for orientation controls
 window.addEventListener('deviceorientation', () ->
-    orient_controls_update = true
-  , false );
+  if not should_use_orient_controls and navigator.platform isnt 'MacIntel'
+    should_use_orient_controls = true
+    orient_controls = new THREE.DeviceOrientationControls(camera)
+, false );
 
 redo_camera = () ->
   camera.aspect = window.innerWidth / window.innerHeight
@@ -146,7 +148,7 @@ animate = (time) ->
 
   delta = clock.getDelta()
   controls.update(delta)
-  if orient_controls_update then orient_controls.update()
+  if should_use_orient_controls then orient_controls.update()
 
 animate()
 render()
