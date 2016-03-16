@@ -123,21 +123,18 @@ document.getElementById('wave-btn').onclick = () ->
 document.getElementById('look-btn').onclick = () ->
   if not real_speed then all_do quick_look else
 
+# hack for orientation controls
 window.addEventListener('deviceorientation', () ->
     orient_controls_update = true
   , false );
 
-window.addEventListener('orientationchange', () ->
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(window.innerWidth, window.innerHeight)
-  , false );
+redo_camera = () ->
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(window.innerWidth, window.innerHeight)
 
-window.addEventListener('resize', () ->
-		camera.aspect = window.innerWidth / window.innerHeight
-		camera.updateProjectionMatrix()
-		renderer.setSize(window.innerWidth, window.innerHeight)
-	, false);
+window.addEventListener('orientationchange', redo_camera, false );
+window.addEventListener('resize', redo_camera, false);
 
 render = () ->
   requestAnimationFrame(render)
