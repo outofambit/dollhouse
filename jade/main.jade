@@ -4,14 +4,16 @@ html(lang="en")
     title= Dollhouse
     link(rel='stylesheet' type='text/css' href='mini.css')
   body
-    
+  nav.navbar.navbar-default.navbar-fixed-top
+    div.container-fluid
+      div.btn-toolbar(role="toolbar")
+        div.btn-group(role="group")
+          button#cam-pov-btn.btn.navbar-btn.btn-default View from POV
+          button#cam-tc-btn.btn.navbar-btn.btn-default View from Top Corner
+          button#cam-top-btn.btn.navbar-btn.btn-default View from Top
     nav.navbar.navbar-default.navbar-fixed-bottom
       div.container-fluid
         div.btn-toolbar(role="toolbar")
-          div.btn-group(role="group")
-            button#cam-pov-btn.btn.navbar-btn.btn-default View from POV
-            button#cam-tc-btn.btn.navbar-btn.btn-default View from Top Corner
-            button#cam-top-btn.btn.navbar-btn.btn-default View from Top
           div.btn-group(role="group")
             button#retreat-btn.btn.navbar-btn.btn-default Retreat
             button#enclose-btn.btn.navbar-btn.btn-default Enclose
