@@ -28,6 +28,10 @@ adoptLocale = (cam, locale) ->
   if locale.position? then cam.position.set(locale.position[0], locale.position[1], locale.position[2])
   if locale.rotation? then cam.setRotationFromEuler(new THREE.Euler(locale.rotation[0], locale.rotation[1], locale.rotation[2]))
 
-setTimeout(()->
+# event handlers
+document.getElementById('cam-pov-btn').onclick = () ->
   adoptLocale(camera, locales[0])
-, 5000)
+document.getElementById('cam-tc-btn').onclick = () ->
+  adoptLocale(camera, locales[1])
+document.getElementById('cam-top-btn').onclick = () ->
+  adoptLocale(camera, locales[2])

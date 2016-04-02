@@ -495,6 +495,7 @@ realisticScreenTween = (screen, goal) ->
   # here's a crappy hack to get reasonable speed for rotations
   if big_diff < Math.PI*2.25 and big_diff < Math.PI*2.25
     big_diff *= 25
+    # yes thats a magic number
 
   # screen speed in cm/s
   speed = 25
